@@ -8,5 +8,5 @@
         android:fillType="nonZero"
         android:pathData="M10,38L38,10M10,10L38,38"
         android:strokeWidth="10"
-        android:strokeColor="#3070FF" />
+        android:strokeColor="#FFF0FF" />
 </vector>
