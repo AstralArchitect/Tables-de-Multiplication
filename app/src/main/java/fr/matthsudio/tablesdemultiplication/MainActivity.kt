@@ -28,8 +28,8 @@ import fr.matthsudio.tablesdemultiplication.ui.theme.TablesDeMultiplicationTheme
 
 
 var note = 0;
-var a = 0;
-
+var progression = 0;
+var liste = mutableListOf(0);
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +48,10 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 fun PoserQuestion() {
+    var prem by remember { mutableStateOf((2..10).random()) }
     var rep by remember { mutableStateOf(TextFieldValue()) }
     var afficherResultat by remember { mutableStateOf(false) }
     var afficherQuestion by remember { mutableStateOf(true) }
-    var prem by remember { mutableStateOf((2..10).random()) }
     var deux by remember { mutableStateOf((2..10).random()) }
     var resultat by remember { mutableStateOf(prem * deux) }
 
@@ -61,7 +61,7 @@ fun PoserQuestion() {
             .padding(16.dp)
     ) {
         // Afficher la question seulement si afficherQuestion est vrai
-        if (a != 10 && afficherQuestion) {
+        if (progression != 10 && afficherQuestion) {
             TextField(
                 value = rep,
                 onValueChange = { rep = it },
@@ -71,25 +71,29 @@ fun PoserQuestion() {
                     .padding(bottom = 16.dp)
             )
         }
-        if (a != 10 && afficherQuestion) {
+        if (progression != 10 && afficherQuestion) {
             Button(
                 onClick = {
-                    if (a != 10) {
+                    if (progression != 10) {
                         if (afficherQuestion) {
                             afficherResultat = true
-                            afficherQuestion =
-                                false // Désactiver l'affichage de la question après avoir cliqué sur Valider
+                            //afficherQuestion = false // Désactiver l'affichage de la question après avoir cliqué sur Valider
                             if (rep.text == resultat.toString()) {
                                 note++
                             }
                         }
                         afficherResultat = false
                         afficherQuestion = true
-                        prem = (2..10).random()
                         deux = (2..10).random()
+                        prem = (2..10).random()
                         resultat = prem * deux
+                        while (liste.contains(resultat)){
+                            deux = (2..10).random()
+                            resultat = prem * deux;
+                        }
+                        liste.add(resultat);
                         rep = TextFieldValue()
-                        a++
+                        progression++;
                     } else {
                         afficherResultat = false
                         afficherQuestion = true
@@ -104,7 +108,7 @@ fun PoserQuestion() {
                 }
             }
         }
-        if (a == 10){
+        if (progression == 10){
             fin()
         }
     }
@@ -112,7 +116,7 @@ fun PoserQuestion() {
 
 @Composable
 fun fin(modifier: Modifier = Modifier) {
-    if (a == 10) {
+    if (progression == 10) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -155,4 +159,3 @@ fun fin(modifier: Modifier = Modifier) {
         }
     }
 }
-
