@@ -30,6 +30,7 @@ import fr.matthsudio.tablesdemultiplication.ui.theme.TablesDeMultiplicationTheme
 var note = 0;
 var progression = 0;
 var liste = mutableListOf(0);
+var table = 0;
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    TextField(
+                            value = rep,
+                            onValueChange = { rep = it },
+                            label = { Text("Quel table de multiplication voulez-vous réviser ?") },
+                            modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 16.dp)
+                    )
                     PoserQuestion()
                 }
             }
