@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tables de Multiplication</string>
+    <string name="suivant">suivant</string>
+    <string name="redemmarrer">Redemmarrer</string>
 </resources>
