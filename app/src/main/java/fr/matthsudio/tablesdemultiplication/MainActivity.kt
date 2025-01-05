@@ -5,10 +5,12 @@ import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.color.DynamicColors
 
 class Question(one: Int, two: Int){
     var fact1: Int = one
@@ -23,11 +25,8 @@ class Progression{
     var cAnswerList: MutableList<Int> = mutableListOf()
     var actualQuestion: Question = Question(0,0)
 
-    fun processQuestion(answer: Int) {
+    fun processQuestion() {
         mauvaiseReponses.add(actualQuestion)
-    }
-    fun resetMauvaiseReponses() {
-        mauvaiseReponses = mutableListOf()
     }
     fun getMauvaiseReponses(): List<Question> {
         return mauvaiseReponses
@@ -36,9 +35,6 @@ class Progression{
     fun progress() {
         progression++
     }
-    fun resetProgression() {
-        progression = 0
-    }
     fun getProgression(): Int {
         return progression
     }
@@ -46,15 +42,18 @@ class Progression{
     fun getNote(): Int {
         return note
     }
-    fun resetNote() {
-        note = 0
-    }
     fun incNote() {
         this.note++
     }
 }
 
-class MainActivity : ComponentActivity() {
+fun getThemeColor(context: Context, attribute: Int): Int {
+    val typedValue = TypedValue()
+    context.theme.resolveAttribute(attribute, typedValue, true)
+    return typedValue.data
+}
+
+class MainActivity : AppCompatActivity() {
     private val userProg = Progression()
     private lateinit var textView: TextView
     private lateinit var nextButton: Button
@@ -68,11 +67,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // init les boutons et autres
+        // changer la couleur du thème
+        DynamicColors.applyToActivitiesIfAvailable(this.application)
+        // init les boutons et autres widgets
         textView = findViewById(R.id.commentText)
         nextButton = findViewById(R.id.nextButton)
         answerEditText = findViewById(R.id.answerEditText)
         restartButton = findViewById(R.id.restartButton)
+        // set the answer listener (when enter is pressed)
+        answerEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                // Call your function here
+                onButtonClicked(nextButton)
+                true
+            } else {
+                false
+            }
+        }
         // poser une question à l'utilisateur
         val question = ask(range)
         userProg.actualQuestion = question
@@ -89,12 +100,16 @@ class MainActivity : ComponentActivity() {
             }
             else{
                 userProg.actualQuestion.answer = answer
-                userProg.processQuestion(answer)
+                userProg.processQuestion()
             }
             answerEditText.text.clear()
 
             if (userProg.getProgression() >= 10) {
-                var str = "Vous avez obtenu ${userProg.getNote()}/10\n\nVos erreurs :\n"
+                var str = "Vous avez obtenu ${userProg.getNote()}/10"
+
+                str += if (userProg.getNote() != 10) "\n\nVos erreurs :\n"
+                else ", bravo!"
+
                 for (i in userProg.getMauvaiseReponses()) {
                     str += "${i.fact1} x ${i.fact2} = ${i.res} (votre réponse : ${i.answer})\n"
                 }
@@ -129,17 +144,7 @@ class MainActivity : ComponentActivity() {
     }
 
     fun onRestartButtonClicked(view: View) {
-        val intent = intent
         finish()
         startActivity(intent)
     }
 }
-
-// TODO: changer la couleur du theme
-/*fun getThemeColor(context: Context, attribute: Int): Int {
-    val typedValue = TypedValue()
-    context.theme.resolveAttribute(attribute, typedValue, true)
-    return typedValue.data
-}
-// Usage:
-val primaryColor = getThemeColor(this, android.R.attr.colorPrimary)*/
