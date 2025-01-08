@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "fr.matthsudio.tablesdemultiplication"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "fr.matthsudio.tablesdemultiplication"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "5.0.0"
+        versionName = "6.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
