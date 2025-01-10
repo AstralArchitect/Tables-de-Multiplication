@@ -52,17 +52,30 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
     <Button
         android:id="@+id/startButton"
-        android:layout_width="156dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:background="@drawable/round_button"
         android:text="@string/commencer"
         android:onClick="onStartButtonClick"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintTop_toTopOf="@+id/buttonGuideline"
-        tools:ignore="MissingConstraints,UsingOnClickInXml" />
+        tools:ignore="" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

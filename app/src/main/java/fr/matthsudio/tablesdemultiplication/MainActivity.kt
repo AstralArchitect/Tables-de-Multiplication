@@ -3,13 +3,17 @@ package fr.matthsudio.tablesdemultiplication
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 class Question(one: Int, two: Int){
@@ -66,8 +70,15 @@ class MainActivity : AppCompatActivity() {
     private val questionCount = AppStart.questionCount
     private val questionRange = mutableListOf<Int>(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
+    @RequiresApi(Build.VERSION_CODES.S)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        StrictMode.setVmPolicy(
+            StrictMode.VmPolicy.Builder()
+            .detectUnsafeIntentLaunch()
+            .build()
+        )
+        super.onCreate(savedInstanceState)
         // test if the values are correct
         if (AppStart.questionRange.first == 0 && AppStart.questionRange.last == 0)
         {
@@ -75,7 +86,6 @@ class MainActivity : AppCompatActivity() {
             finish()
             startActivity(intent)
         }
-        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // init les boutons et autres widgets
         textView = findViewById(R.id.commentText)
@@ -122,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                 for (i in userProg.getMauvaiseReponses()) {
                     str += "${i.table} x ${i.question} = ${i.res} (votre réponse : ${i.answer})\n"
                 }
-                textView.text = str
+                textView.text= str
                 nextButton.visibility = View.GONE
                 answerEditText.visibility = View.GONE
                 restartButton.visibility = View.VISIBLE
@@ -146,6 +156,15 @@ class MainActivity : AppCompatActivity() {
     private fun ask(range: IntRange): Question {
         var one: Int
         var two: Int
+
+        val maxSize = range.count() * questionRange.count()
+
+        if (userProg.cAnswerList.size >= maxSize)
+            userProg.cAnswerList.clear()
+
+        Log.i("MainActivity:ask()", "range: $range")
+        Log.i("MainActivity:ask()", "range's size: ${range.count()}")
+        Log.i("MainActivity:ask()", "userProg.cAnswerList's size: ${userProg.cAnswerList.size}")
 
         do {
             one = range.random()
