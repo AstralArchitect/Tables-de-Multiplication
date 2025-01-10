@@ -4,7 +4,7 @@ import android.app.Application
 
 class AppStart: Application() {
     companion object {
-        var questionRange: IntRange = 2..10
-        var questionCount = 3
+        var questionRange: IntRange = 2..2
+        var questionCount = 13
     }
 }
