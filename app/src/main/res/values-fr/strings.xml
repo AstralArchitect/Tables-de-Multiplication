@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suivant">suivant</string>
+    <string name="redemmarrer">redemmarrer</string>
+    <string name="commencer">commencer</string>
+    <string name="quitter_string">quitter</string>
+    <string name="questionCountEditText_hint">Entrez le nombre de question à poser (10 par défaut)</string>
+</resources>

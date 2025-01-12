@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">Tables de Multiplication</string>
-    <string name="suivant">suivant</string>
-    <string name="redemmarrer">Redemmarrer</string>
-    <string name="commencer">commencer</string>
-    <string name="config_range_string">Entrez la plage de table (ex: 1–10)</string>
-    <string name="quitter_string">quitter</string>
-    <string name="questionCountEditText_hint">Entrez le nombre de question à poser</string>
+    <string name="app_name" translatable="false">Tables de Multiplication</string>
+    <string name="suivant">next</string>
+    <string name="redemmarrer">restart</string>
+    <string name="commencer">start</string>
+    <string name="quitter_string">quit</string>
+    <string name="questionCountEditText_hint">Enter the number of questions to ask (default:10)</string>
 </resources>

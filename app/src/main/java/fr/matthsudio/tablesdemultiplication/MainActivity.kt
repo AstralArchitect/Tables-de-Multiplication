@@ -2,14 +2,18 @@ package fr.matthsudio.tablesdemultiplication
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.Chronometer
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Locale
 
 class Question(one: Int, two: Int){
     var table: Int = one
@@ -53,11 +57,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var restartButton: Button
     private lateinit var quitButton: Button
     private lateinit var answerEditText: EditText
+    private lateinit var chronometer: Chronometer
 
     // definir la plage des tables
     private val tables = AppStart.tables
     private val questionCount = AppStart.questionCount
-    private val questionRange = mutableListOf<Int>(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+    private val questionRange = 2..12
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         answerEditText = findViewById(R.id.answerEditText)
         restartButton = findViewById(R.id.restartButton)
         quitButton = findViewById(R.id.quitButton)
+        chronometer = findViewById(R.id.chronometer)
         // set the answer listener (when enter is pressed)
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -83,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         val question = ask(tables)
         userProg.actualQuestion = question
         answerEditText.hint = "Combien font ${question.table} x ${question.question} ?"
+        chronometer.start()
     }
 
     @SuppressLint("SetTextI18n", "DefaultLocale")
@@ -101,21 +108,22 @@ class MainActivity : AppCompatActivity() {
             answerEditText.text.clear()
 
             if (userProg.getProgression() >= questionCount) {
-                var str = "Vous avez obtenu " + String.format("%.2f", userProg.getNote().toFloat() / questionCount.toFloat() * 20.0) + "/20"
+                var str = "Vous avez eu " + String.format("%.2f", userProg.getNote().toFloat() / questionCount.toFloat() * 20.0) + "/20 en " + getFormattedElapsedTime(chronometer) + " secondes."
 
-                str += if ((userProg.getNote().toFloat() / questionCount.toFloat()).toDouble() != 1.0) "\n\nVos erreurs :\n"
-                else ", bravo!"
+                str += if ((userProg.getNote().toFloat() / questionCount.toFloat()).toDouble() != 1.0) "\nTemps moyen par question : ${getFormattedElapsedTime(chronometer, questionCount)}\n\nVos erreurs :\n"
+                else ", bravo!\n\nTemps moyen par question : ${getFormattedElapsedTime(chronometer, questionCount)}"
 
                 for (i in userProg.getMauvaiseReponses()) {
                     str += "${i.table} x ${i.question} = ${i.res} (votre réponse : ${i.answer})\n"
                 }
                 textView.text= str
-                nextButton.visibility = View.GONE
+                view.visibility = View.GONE
                 answerEditText.visibility = View.GONE
                 restartButton.visibility = View.VISIBLE
                 quitButton.visibility = View.VISIBLE
-
-                answerEditText.setOnEditorActionListener { _, _, _ -> false }
+                chronometer.stop()
+                chronometer.visibility = View.GONE
+                answerEditText.isEnabled = false
 
                 return
             }
@@ -140,7 +148,6 @@ class MainActivity : AppCompatActivity() {
             userProg.cAnswerList.clear()
 
         Log.i("MainActivity:ask()", "range: $range")
-        Log.i("MainActivity:ask()", "range's size: ${range.count()}")
         Log.i("MainActivity:ask()", "userProg.cAnswerList's size: ${userProg.cAnswerList.size}")
 
         do {
@@ -150,6 +157,12 @@ class MainActivity : AppCompatActivity() {
         userProg.cAnswerList.add(one * two)
 
         return Question(one, two)
+    }
+
+    private fun getFormattedElapsedTime(chronometer: Chronometer, qCount: Int = 1): String {
+        val elapsedMillis = (SystemClock.elapsedRealtime() - chronometer.base) / qCount
+        val format = SimpleDateFormat("mm:ss", Locale.getDefault())
+        return format.format(elapsedMillis)
     }
 
     fun onRestartButtonClicked(view: View) {

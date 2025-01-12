@@ -37,6 +37,7 @@ class ConfigurationActivity: AppCompatActivity() {
 
     fun onStartButtonClick(view: View) {
         // get the tables from the checkboxes
+        AppStart.tables.clear()
         for (i in 0 until checkBoxes.size)
         {
             if (checkBoxes[i].isChecked)
@@ -44,8 +45,11 @@ class ConfigurationActivity: AppCompatActivity() {
                 AppStart.tables.add(i + 1)
             }
         }
-        // get the count from the editText2
-        AppStart.questionCount = questionCountEditText.text.toString().toInt()
+        // get the count from the editText
+        if (questionCountEditText.text.toString() == "")
+            AppStart.questionCount = 10
+        else
+            AppStart.questionCount = questionCountEditText.text.toString().toInt()
 
         val intent = Intent(this, MainActivity::class.java)
         finish()

@@ -3,11 +3,11 @@
   <component name="deploymentTargetSelector">
     <selectionStates>
       <SelectionState runConfigName="app">
-        <option name="selectionMode" value="DIALOG" />
-        <DropdownSelection timestamp="2025-01-10T21:45:28.192334700Z">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-01-12T17:04:07.411255Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\matth\.android\avd\Pixel_9_Pro_XL_API_UpsideDownCakePrivacySandbox.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\matth\.android\avd\A52S_5G_API_34.avd" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -38,21 +38,21 @@
       </SelectionState>
       <SelectionState runConfigName="MainActivity">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-01-11T15:27:46.405776700Z">
+        <DropdownSelection timestamp="2025-01-12T18:09:31.408344200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\matth\.android\avd\Small_Phone_API_26.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\matth\.android\avd\Pixel_9_Pro_XL_API_UpsideDownCakePrivacySandbox.avd" />
             </handle>
           </Target>
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
       <SelectionState runConfigName="ConfigurationActivity">
-        <option name="selectionMode" value="DIALOG" />
-        <DropdownSelection timestamp="2025-01-12T15:34:21.758991800Z">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-01-12T17:12:20.071866Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\matth\.android\avd\Small_Phone_API_26.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZCT1009MMF" />
             </handle>
           </Target>
         </DropdownSelection>
