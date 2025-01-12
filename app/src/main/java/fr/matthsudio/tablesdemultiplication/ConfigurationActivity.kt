@@ -2,55 +2,53 @@ package fr.matthsudio.tablesdemultiplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 class ConfigurationActivity: AppCompatActivity() {
     private lateinit var button: Button
-    private lateinit var questionRangeEditText: EditText
     private lateinit var questionCountEditText: EditText
+
+    private lateinit var checkBoxes: MutableList<CheckBox>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
 
         button = findViewById(R.id.startButton)
-        questionRangeEditText = findViewById(R.id.questionRangeEditText)
         questionCountEditText = findViewById(R.id.questionCountEditText)
+
+        checkBoxes = mutableListOf()
+
+        checkBoxes.add(findViewById(R.id.checkBox1))
+        checkBoxes.add(findViewById(R.id.checkBox2))
+        checkBoxes.add(findViewById(R.id.checkBox3))
+        checkBoxes.add(findViewById(R.id.checkBox4))
+        checkBoxes.add(findViewById(R.id.checkBox5))
+        checkBoxes.add(findViewById(R.id.checkBox6))
+        checkBoxes.add(findViewById(R.id.checkBox7))
+        checkBoxes.add(findViewById(R.id.checkBox8))
+        checkBoxes.add(findViewById(R.id.checkBox9))
+        checkBoxes.add(findViewById(R.id.checkBox10))
     }
 
     fun onStartButtonClick(view: View) {
-        Log.d("ConfigurationActivity", "onStartButtonClick")
-        if (questionRangeEditText.text.toString() == "" || questionCountEditText.text.toString() == "")
+        // get the tables from the checkboxes
+        for (i in 0 until checkBoxes.size)
         {
-            Log.d("ConfigurationActivity", "nothing was entered in the editText")
-            return
+            if (checkBoxes[i].isChecked)
+            {
+                AppStart.tables.add(i + 1)
+            }
         }
-        // get the range from the editText1
-        AppStart.questionRange = stringToIntRange(questionRangeEditText.text.toString())
         // get the count from the editText2
         AppStart.questionCount = questionCountEditText.text.toString().toInt()
-        Log.d("ConfigurationActivity", "questionRangeEditText: ${questionRangeEditText.text}")
-        Log.d("ConfigurationActivity", "questionCountEditText: ${questionCountEditText.text}")
 
         val intent = Intent(this, MainActivity::class.java)
         finish()
         startActivity(intent)
-    }
-
-    private fun stringToIntRange(range: String): IntRange {
-        val parts = range.split("-")
-        if (parts.size != 2) {
-            return 0..0
-        }
-        val start = parts[0].toIntOrNull()
-        val end = parts[1].toIntOrNull()
-        if (start == null || end == null) {
-            return 0..0
-        }
-        return start..end
     }
 }

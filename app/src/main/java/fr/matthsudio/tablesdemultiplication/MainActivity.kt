@@ -1,19 +1,14 @@
 package fr.matthsudio.tablesdemultiplication
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
 import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 
 class Question(one: Int, two: Int){
@@ -51,12 +46,6 @@ class Progression{
     }
 }
 
-fun getThemeColor(context: Context, attribute: Int): Int {
-    val typedValue = TypedValue()
-    context.theme.resolveAttribute(attribute, typedValue, true)
-    return typedValue.data
-}
-
 class MainActivity : AppCompatActivity() {
     private val userProg = Progression()
     private lateinit var textView: TextView
@@ -66,26 +55,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var answerEditText: EditText
 
     // definir la plage des tables
-    private val range = AppStart.questionRange
+    private val tables = AppStart.tables
     private val questionCount = AppStart.questionCount
     private val questionRange = mutableListOf<Int>(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
-    @RequiresApi(Build.VERSION_CODES.S)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
-        StrictMode.setVmPolicy(
-            StrictMode.VmPolicy.Builder()
-            .detectUnsafeIntentLaunch()
-            .build()
-        )
         super.onCreate(savedInstanceState)
-        // test if the values are correct
-        if (AppStart.questionRange.first == 0 && AppStart.questionRange.last == 0)
-        {
-            val intent = Intent(this, ConfigurationActivity::class.java)
-            finish()
-            startActivity(intent)
-        }
         setContentView(R.layout.activity_main)
         // init les boutons et autres widgets
         textView = findViewById(R.id.commentText)
@@ -104,10 +80,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // poser une question à l'utilisateur
-        val question = ask(range)
+        val question = ask(tables)
         userProg.actualQuestion = question
         answerEditText.hint = "Combien font ${question.table} x ${question.question} ?"
     }
+
     @SuppressLint("SetTextI18n", "DefaultLocale")
     fun onButtonClicked(view: View) {
         try {
@@ -143,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 return
             }
 
-            val question = ask(range)
+            val question = ask(tables)
             userProg.actualQuestion = question
             answerEditText.hint = "Combien font ${question.table} x ${question.question} ?"
             textView.text = ""
@@ -153,7 +130,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun ask(range: IntRange): Question {
+    private fun ask(range: MutableList<Int>): Question {
         var one: Int
         var two: Int
 

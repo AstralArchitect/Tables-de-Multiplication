@@ -4,7 +4,7 @@ import android.app.Application
 
 class AppStart: Application() {
     companion object {
-        var questionRange: IntRange = 2..2
+        val tables: MutableList<Int> = mutableListOf<Int>()
         var questionCount = 13
     }
 }

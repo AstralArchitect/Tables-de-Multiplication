@@ -7,27 +7,91 @@
     tools:context=".ConfigurationActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/questionRangeEditTextGuideline"
+        android:id="@+id/questionCountEditTextGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.025" />
 
-    <EditText
-        android:id="@+id/questionRangeEditText"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:autofillHints=""
-        android:hint="@string/config_range_string"
-        android:drawablePadding="8dp"
-        android:inputType="none"
-        android:textSize="15sp"
-        android:imeOptions="actionDone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/questionRangeEditTextGuideline"
-        tools:ignore="LabelFor" />
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Table de 1"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/questionCountEditText" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Table de 2"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        android:text="Table de 3"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2"/>
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        android:text="Table de 4"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        android:text="Table de 5"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+
+    <CheckBox
+        android:id="@+id/checkBox6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        android:text="Table de 6"
+        app:layout_constraintTop_toBottomOf="@+id/questionCountEditText" />
+
+    <CheckBox
+        android:id="@+id/checkBox7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        android:text="Table de 7"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+
+    <CheckBox
+        android:id="@+id/checkBox8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        android:text="Table de 8"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+
+    <CheckBox
+        android:id="@+id/checkBox9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        android:text="Table de 9"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+
+    <CheckBox
+        android:id="@+id/checkBox10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        android:text="Table de 10"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
 
     <EditText
         android:id="@+id/questionCountEditText"
@@ -42,15 +106,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionRangeEditText"
+        app:layout_constraintTop_toTopOf="@+id/questionCountEditTextGuideline"
         tools:ignore="LabelFor" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/buttonGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_end"
@@ -70,12 +127,13 @@
         android:id="@+id/startButton"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:text="@string/commencer"
+        android:layout_marginTop="80dp"
         android:onClick="onStartButtonClick"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        android:text="@string/commencer"
         app:layout_constraintEnd_toEndOf="@+id/guideline_end"
-        app:layout_constraintTop_toTopOf="@+id/buttonGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toTopOf="@+id/checkBox10"
         tools:ignore="" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
