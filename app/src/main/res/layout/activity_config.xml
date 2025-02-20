@@ -33,64 +33,64 @@
         android:id="@+id/checkBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
         android:text="Table de 3"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2"/>
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
     <CheckBox
         android:id="@+id/checkBox4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
         android:text="Table de 4"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
     <CheckBox
         android:id="@+id/checkBox5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
         android:text="Table de 5"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
     <CheckBox
         android:id="@+id/checkBox6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         android:text="Table de 6"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintTop_toBottomOf="@+id/questionCountEditText" />
 
     <CheckBox
         android:id="@+id/checkBox7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         android:text="Table de 7"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
 
     <CheckBox
         android:id="@+id/checkBox8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         android:text="Table de 8"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
 
     <CheckBox
         android:id="@+id/checkBox9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         android:text="Table de 9"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
 
     <CheckBox
         android:id="@+id/checkBox10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         android:text="Table de 10"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
 
     <EditText
@@ -129,11 +129,22 @@
         android:layout_height="46dp"
         android:layout_marginTop="80dp"
         android:onClick="onStartButtonClick"
+        android:rotationX="0"
         android:text="@string/commencer"
         app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_start"
         app:layout_constraintTop_toTopOf="@+id/checkBox10"
         tools:ignore="" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:onClick="onScoreButtonClick"
+        android:text="voir les stats"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

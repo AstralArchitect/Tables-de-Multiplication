@@ -125,6 +125,14 @@ class MainActivity : AppCompatActivity() {
                 chronometer.visibility = View.GONE
                 answerEditText.isEnabled = false
 
+                // update score
+                val score = AppStart.score
+                score.averageScore = ((score.numberOfPart * score.averageScore) + userProg.getNote().toFloat() / questionCount.toFloat() * 20.0) / (score.numberOfPart + 1)
+                score.averageTime = ((score.numberOfPart * score.averageTime) + (SystemClock.elapsedRealtime() - chronometer.base) / questionCount / 1000) / (score.numberOfPart + 1)
+                score.numberOfPart++
+
+                score.saveScore(this)
+
                 return
             }
 

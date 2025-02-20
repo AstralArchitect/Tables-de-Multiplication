@@ -55,4 +55,10 @@ class ConfigurationActivity: AppCompatActivity() {
         finish()
         startActivity(intent)
     }
+
+    fun onScoreButtonClick(view: View) {
+        val intent = Intent(this, ScoreAndStats::class.java)
+        finish()
+        startActivity(intent)
+    }
 }
