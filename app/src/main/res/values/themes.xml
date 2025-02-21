@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.TablesDeMultiplication" parent="Theme.AppCompat.DayNight.NoActionBar">
-
+    <style name="Theme.tablesdemultiplication" parent="Theme.Material3.DayNight.NoActionBar">
+        <!--<item name="android:dynamicColor">true</item>-->
+        <!-- Fallback colors for older devices -->
+        <item name="colorPrimary">@color/my_static_primary</item>
+        <item name="colorSecondary">@color/my_static_secondary</item>
+        <item name="colorOnPrimary">@color/my_static_on_primary</item>
+        <item name="colorOnSecondary">@color/my_static_on_secondary</item>
+        <item name="colorSurface">@color/my_static_surface</item>
+        <item name="colorOnSurface">@color/my_static_on_surface</item>
+        <!-- ... other color attributes ... -->
     </style>
-
-    <style name="AppTheme" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
-
-    </style>
-
-    <style name="NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="Theme.Material3.DynamicColors.DayNight.NoActionBar" parent="android:Theme.Material.Light.NoActionBar" />
 
 </resources>

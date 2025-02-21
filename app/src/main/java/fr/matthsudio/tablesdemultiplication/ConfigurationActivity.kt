@@ -45,6 +45,9 @@ class ConfigurationActivity: AppCompatActivity() {
                 AppStart.tables.add(i + 1)
             }
         }
+
+        if (AppStart.tables.isEmpty())
+            return
         // get the count from the editText
         if (questionCountEditText.text.toString() == "")
             AppStart.questionCount = 10

@@ -3,6 +3,7 @@ package fr.matthsudio.tablesdemultiplication
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import com.google.android.material.color.DynamicColors
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -74,7 +75,7 @@ class FileManager(private var context: Context) {
 
 data class Score (
     var averageScore: Double,
-    var averageTime: Double,
+    var averageTime: Int,
     var numberOfPart: Long
 )
 {
@@ -89,16 +90,17 @@ data class Score (
         val fileManager = FileManager(context)
         fileManager.deleteFile(context, "score.json")
         this.averageScore = 0.0
-        this.averageTime = 0.0
+        this.averageTime = 0
         this.numberOfPart = 0
     }
 }
 
 class AppStart: Application() {
-    lateinit var fileManager: FileManager
-    lateinit var gson: Gson
+    private lateinit var fileManager: FileManager
+    private lateinit var gson: Gson
     override fun onCreate() {
         super.onCreate()
+        DynamicColors.applyToActivitiesIfAvailable(this)
         // init Gson and FileManager
         gson = Gson()
         fileManager = FileManager(this)
@@ -107,7 +109,7 @@ class AppStart: Application() {
         if (!fileManager.fileExists(this, "score.json")) {
             Log.i("AppStart", "score.json does not exist, creating it...")
             // if not, create it
-            val score = Score(0.0, 0.0, 0)
+            val score = Score(0.0, 0, 0)
             val json = gson.toJson(score)
             fileManager.writeToFile("score.json", json)
         }
@@ -120,7 +122,7 @@ class AppStart: Application() {
 
     companion object {
         // configuration for debugging
-        val tables: MutableList<Int> = mutableListOf<Int>(2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val tables: MutableList<Int> = mutableListOf(2, 3, 4, 5, 6, 7, 8, 9, 10)
         var questionCount: Int = 3
         lateinit var score: Score
     }

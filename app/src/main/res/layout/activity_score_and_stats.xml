@@ -10,7 +10,7 @@ android:padding="16dp">
         android:id="@+id/bestScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Stats"
+        android:text="@string/your_stats"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -18,7 +18,7 @@ android:padding="16dp">
         android:id="@+id/averageScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Average Score"
+        android:text="@string/average_score"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -27,14 +27,13 @@ android:padding="16dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="0/20"
         android:textSize="36sp" />
 
     <TextView
         android:id="@+id/averageTimeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Average Time per question"
+        android:text="@string/average_time_per_question"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -43,14 +42,13 @@ android:padding="16dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="0 seconds"
         android:textSize="36sp" />
 
     <TextView
         android:id="@+id/numberOfPartsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Number of Parts"
+        android:text="@string/number_of_parts"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -59,7 +57,6 @@ android:padding="16dp">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="0"
         android:textSize="36sp" />
 
     <Button
@@ -67,16 +64,14 @@ android:padding="16dp">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:rotationX="0"
-        android:text="exit"
-        android:onClick="onExiButtonClicked"
+        android:text="@string/exit"
+        android:onClick="onExitButtonClicked"
         />
 
     <Button
         android:id="@+id/resetButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="reset stats"
-        android:onClick="onResetButtonClicked"
-        />
+        android:text="@string/reset_stats_title" />
 
 </LinearLayout>

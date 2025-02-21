@@ -2,7 +2,6 @@ package fr.matthsudio.tablesdemultiplication
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
@@ -13,7 +12,7 @@ import android.widget.Chronometer
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.util.Locale
+import java.text.DecimalFormat
 
 class Question(one: Int, two: Int){
     var table: Int = one
@@ -128,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                 // update score
                 val score = AppStart.score
                 score.averageScore = ((score.numberOfPart * score.averageScore) + userProg.getNote().toFloat() / questionCount.toFloat() * 20.0) / (score.numberOfPart + 1)
-                score.averageTime = ((score.numberOfPart * score.averageTime) + (SystemClock.elapsedRealtime() - chronometer.base) / questionCount / 1000) / (score.numberOfPart + 1)
+                score.averageTime = (((score.numberOfPart * score.averageTime) + (SystemClock.elapsedRealtime() - chronometer.base) / questionCount) / (score.numberOfPart + 1)).toInt()
                 score.numberOfPart++
 
                 score.saveScore(this)
@@ -169,8 +168,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun getFormattedElapsedTime(chronometer: Chronometer, qCount: Int = 1): String {
         val elapsedMillis = (SystemClock.elapsedRealtime() - chronometer.base) / qCount
-        val format = SimpleDateFormat("mm:ss", Locale.getDefault())
-        return format.format(elapsedMillis)
+        val centiseconds = elapsedMillis / 10 // Convert milliseconds to centiseconds
+        return formatTime(centiseconds.toInt())
+    }
+
+    private fun formatTime(centiseconds: Int): String {
+        val minutes = centiseconds / 6000
+        val seconds = (centiseconds % 6000) / 100
+        val hundredths = centiseconds % 100
+
+        val minutesFormat = DecimalFormat("00")
+        val secondsFormat = DecimalFormat("00")
+        val hundredthsFormat = DecimalFormat("00")
+
+        return "${minutesFormat.format(minutes)}:${secondsFormat.format(seconds)}:${hundredthsFormat.format(hundredths)}"
     }
 
     fun onRestartButtonClicked(view: View) {

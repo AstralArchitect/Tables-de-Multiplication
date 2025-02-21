@@ -5,4 +5,16 @@
     <string name="commencer">commencer</string>
     <string name="quitter_string">quitter</string>
     <string name="questionCountEditText_hint">Entrez le nombre de question à poser (10 par défaut)</string>
+    <string name="title_activity_score_and_stats">Score et Stats</string>
+    <string name="reset_stats_title">Effacer Stats</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="reset_cancelled">Réinitialisaton annulée</string>
+    <string name="stats_reset">Les stats ont été réinitilalisés</string>
+    <string name="reset_stats_message">Êtes vous sur de vouloir effacer les stats? Cette action est irreversible.</string>
+    <string name="your_stats">Vos Stats</string>
+    <string name="average_score">Score Moyen</string>
+    <string name="average_time_per_question">Temps Moyen / Question</string>
+    <string name="number_of_parts">Nombre de Parties</string>
+    <string name="exit">retour</string>
 </resources>
