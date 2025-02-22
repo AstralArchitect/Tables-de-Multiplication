@@ -56,12 +56,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var restartButton: Button
     private lateinit var quitButton: Button
     private lateinit var answerEditText: EditText
+    private lateinit var returnButton: Button
     private lateinit var chronometer: Chronometer
+    private var elapsedTime: Long = 0
+    private var isRunning = false
 
     // definir la plage des tables
     private val tables = AppStart.tables
     private val questionCount = AppStart.questionCount
     private val questionRange = 2..12
+
+    companion object {
+        private const val ELAPSED_TIME_KEY = "elapsed_time"
+        private const val IS_RUNNING_KEY = "is_running"
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +81,20 @@ class MainActivity : AppCompatActivity() {
         answerEditText = findViewById(R.id.answerEditText)
         restartButton = findViewById(R.id.restartButton)
         quitButton = findViewById(R.id.quitButton)
+        returnButton = findViewById(R.id.returnButton)
         chronometer = findViewById(R.id.chronometer)
+
+        if (savedInstanceState != null) {
+            elapsedTime = savedInstanceState.getLong(ELAPSED_TIME_KEY)
+            isRunning = savedInstanceState.getBoolean(IS_RUNNING_KEY)
+            chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
+            if (isRunning) {
+                chronometer.start()
+            }
+        } else {
+            chronometer.base = SystemClock.elapsedRealtime()
+        }
+
         // set the answer listener (when enter is pressed)
         answerEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -89,6 +110,13 @@ class MainActivity : AppCompatActivity() {
         userProg.actualQuestion = question
         answerEditText.hint = "Combien font ${question.table} x ${question.question} ?"
         chronometer.start()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
+        outState.putLong(ELAPSED_TIME_KEY, elapsedTime)
+        outState.putBoolean(IS_RUNNING_KEY, isRunning)
     }
 
     @SuppressLint("SetTextI18n", "DefaultLocale")
@@ -120,9 +148,11 @@ class MainActivity : AppCompatActivity() {
                 answerEditText.visibility = View.GONE
                 restartButton.visibility = View.VISIBLE
                 quitButton.visibility = View.VISIBLE
+                returnButton.visibility = View.GONE
                 chronometer.stop()
                 chronometer.visibility = View.GONE
                 answerEditText.isEnabled = false
+
 
                 // update score
                 val score = AppStart.score
@@ -194,5 +224,9 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ConfigurationActivity::class.java)
         finish()
         startActivity(intent)
+    }
+
+    fun onReturnButtonClicked(view: View) {
+        finish()
     }
 }

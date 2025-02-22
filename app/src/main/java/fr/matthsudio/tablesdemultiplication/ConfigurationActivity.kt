@@ -55,7 +55,6 @@ class ConfigurationActivity: AppCompatActivity() {
             AppStart.questionCount = questionCountEditText.text.toString().toInt()
 
         val intent = Intent(this, MainActivity::class.java)
-        finish()
         startActivity(intent)
     }
 

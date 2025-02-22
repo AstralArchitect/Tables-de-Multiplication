@@ -96,6 +96,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,5 +120,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewGuideline" />
+
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:drawablePadding="8dp"
+        android:onClick="onReturnButtonClicked"
+        android:text="@string/retour"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="UsingOnClickInXml,RtlHardcoded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
